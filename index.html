@@ -13,7 +13,7 @@ canvas{position:fixed;inset:0;width:100%;height:100%;z-index:0}
 .hero{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:12px}
 
 .date{font-size:clamp(12px,2vw,16px);letter-spacing:8px;text-transform:uppercase;color:#ffe600;text-shadow:0 0 12px #ffb700,0 0 25px #ff9800;font-weight:600}
-h1{font-family:'Georgia',serif;font-size:clamp(38px,8vw,100px);line-height:0.95;color:#fffbca;text-shadow:0 0 15px #fff,0 0 35px #ffd000,0 0 75px #ff8c00;animation:glow 2.5s infinite alternate ease-in-out;margin:8px 0}
+h1{font-family:'Georgia',serif;font-size:clamp(45px,9vw,110px);line-height:0.9;color:#fffbca;text-shadow:0 0 15px #fff,0 0 35px #ffd000,0 0 75px #ff8c00;animation:glow 2.5s infinite alternate ease-in-out;margin:8px 0}
 @keyframes glow{
   0%{transform:scale(0.98);filter:brightness(1);text-shadow:0 0 15px #fff,0 0 35px #ffd000,0 0 75px #ff8c00}
   100%{transform:scale(1.02);filter:brightness(1.3);text-shadow:0 0 22px #fff,0 0 45px #ffe600,0 0 100px #ff6f00}
@@ -52,7 +52,7 @@ h1{font-family:'Georgia',serif;font-size:clamp(38px,8vw,100px);line-height:0.95;
 .signature{font:26px cursive;color:#7a5000;margin-top:30px;text-align:right}
 
 @media(max-width:600px){
-  h1{font-size:42px}
+  h1{font-size:52px}
   .subtitle{font-size:14px}
   .envelope{padding:35px 22px 25px}
   .envelope p{font-size:15px}
@@ -62,11 +62,6 @@ h1{font-family:'Georgia',serif;font-size:clamp(38px,8vw,100px);line-height:0.95;
 <body>
 
 <canvas id="canvas"></canvas>
-
-<!-- Elemento de audio nativo que reproduce musica.mp3 directamente -->
-<audio id="bg-audio" loop preload="auto">
-  <source src="musica.mp3" type="audio/mpeg">
-</audio>
 
 <div id="ui">
   <div class="hero" id="hero">
@@ -79,7 +74,7 @@ h1{font-family:'Georgia',serif;font-size:clamp(38px,8vw,100px);line-height:0.95;
   </div>
 </div>
 
-<button id="music">🔊</button>
+<button id="music">🔇</button>
 <div id="counter">🌻 0 flores florecidas</div>
 
 <div id="modal">
@@ -125,48 +120,49 @@ h1{font-family:'Georgia',serif;font-size:clamp(38px,8vw,100px);line-height:0.95;
   </div>
 </div>
 
+<!-- Audio nativo HTML5 -->
+<audio id="audioPlayer" src="musica.mp3" loop preload="auto"></audio>
+
 <script>
-const audio = document.getElementById("bg-audio");
-const musicBtn = document.getElementById("music");
-let isMusicPlaying = false;
+var audioPlayer = document.getElementById("audioPlayer");
+var isMusicPlaying = false;
 
-function playAudio() {
-  audio.play().then(() => {
-    isMusicPlaying = true;
-    musicBtn.textContent = "🔊";
-  }).catch(err => {
-    console.log("Esperando toque del usuario para iniciar música...");
-  });
-}
-
-function toggleMusic() {
-  if (isMusicPlaying) {
-    audio.pause();
-    isMusicPlaying = false;
-    musicBtn.textContent = "🔇";
-  } else {
-    audio.play();
-    isMusicPlaying = true;
-    musicBtn.textContent = "🔊";
+function playMusic() {
+  if (audioPlayer && !isMusicPlaying) {
+    audioPlayer.play().then(() => {
+      isMusicPlaying = true;
+      document.getElementById("music").textContent = "🔊";
+    }).catch(e => {
+      console.log("Esperando interacción para reproducir audio");
+    });
   }
 }
 
-function enableAudioOnInteraction() {
-  playAudio();
-  ['click', 'touchstart', 'pointerdown'].forEach(evt => {
-    document.removeEventListener(evt, enableAudioOnInteraction);
-  });
+function toggleMusic() {
+  if (!audioPlayer) return;
+  if (isMusicPlaying) {
+    audioPlayer.pause();
+    isMusicPlaying = false;
+    document.getElementById("music").textContent = "🔇";
+  } else {
+    audioPlayer.play().then(() => {
+      isMusicPlaying = true;
+      document.getElementById("music").textContent = "🔊";
+    });
+  }
 }
 
-['click', 'touchstart', 'pointerdown'].forEach(evt => {
-  document.addEventListener(evt, enableAudioOnInteraction);
+function enableAutoAudio() {
+  playMusic();
+  ['click', 'touchstart', 'pointerdown'].forEach(event => {
+    document.removeEventListener(event, enableAutoAudio);
+  });
+}
+['click', 'touchstart', 'pointerdown'].forEach(event => {
+  document.addEventListener(event, enableAutoAudio);
 });
 
-musicBtn.onclick = (e) => {
-  e.stopPropagation();
-  toggleMusic();
-};
-
+// Animación Canvas Optimizado
 const canvas=document.getElementById("canvas");
 const ctx=canvas.getContext("2d");
 let W,H,dpr;
@@ -174,8 +170,11 @@ let started=false, mouse={x:0,y:0,tx:0,ty:0};
 let particles=[], flowers=[], fireflies=[], shootingStars=[];
 let flowerCount=0;
 
+const MAX_PARTICLES = 120; // Límite de partículas para evitar lag
+const MAX_FLOWERS = 35;     // Límite de flores simultáneas en pantalla
+
 function resize(){
-  dpr=Math.min(devicePixelRatio||1,2);
+  dpr=Math.min(devicePixelRatio||1,1.5); // Ajuste ligero de DPR para pantallas móviles súper retina
   W=innerWidth;H=innerHeight;
   canvas.width=W*dpr;canvas.height=H*dpr;
   canvas.style.width=W+"px";canvas.style.height=H+"px";
@@ -185,19 +184,26 @@ addEventListener("resize",resize); resize();
 
 addEventListener("pointermove",e=>{
   mouse.tx=e.clientX;mouse.ty=e.clientY;
-  if(started && Math.random()<0.4){
-    particles.push(new Particle(e.clientX,e.clientY,(Math.random()-0.5)*1.5,(Math.random()-0.5)*1.5,rand(1,2.5),rand(20,45),"#ffea00"));
+  if(started && Math.random()<0.3){
+    addParticle(new Particle(e.clientX,e.clientY,(Math.random()-0.5)*1.5,(Math.random()-0.5)*1.5,rand(1,2.5),rand(15,35),"#ffea00"));
   }
 });
 
 addEventListener("pointerdown",e=>{
   if(e.target.tagName==='BUTTON' || e.target.closest('#modal')) return;
   if(!started) return;
-  burst(e.clientX,e.clientY,35);
+  burst(e.clientX,e.clientY,18);
   spawnFlower(e.clientX,e.clientY);
 });
 
 function rand(a,b){return a+Math.random()*(b-a)}
+
+function addParticle(p) {
+  particles.push(p);
+  if(particles.length > MAX_PARTICLES) {
+    particles.shift(); // Elimina las partículas más antiguas si exceden el límite
+  }
+}
 
 class Particle{
   constructor(x,y,vx,vy,size,life,color){
@@ -212,9 +218,8 @@ class Particle{
     let a=Math.max(0,this.life/this.max);
     ctx.globalAlpha=a;
     ctx.fillStyle=this.color;
-    ctx.shadowBlur=12;ctx.shadowColor=this.color;
     ctx.beginPath();ctx.arc(this.x,this.y,this.size,0,Math.PI*2);ctx.fill();
-    ctx.shadowBlur=0;ctx.globalAlpha=1;
+    ctx.globalAlpha=1;
   }
 }
 
@@ -256,7 +261,7 @@ class Flower{
     document.getElementById("counter").textContent=`🌻 ${flowerCount} flores florecidas`;
   }
   update(){
-    this.grow=Math.min(1,this.grow+0.03);
+    this.grow=Math.min(1,this.grow+0.04);
     this.phase+=0.02;
   }
   draw(){
@@ -278,7 +283,7 @@ class Flower{
       ctx.save();ctx.rotate(a);
       let g=ctx.createLinearGradient(0,0,0,-32);
       g.addColorStop(0,"#ff9800");g.addColorStop(0.5,"#ffd600");g.addColorStop(1,"#fff59d");
-      ctx.fillStyle=g;ctx.shadowBlur=10;ctx.shadowColor="#ffb300";
+      ctx.fillStyle=g;
       ctx.beginPath();ctx.ellipse(0,-20,7,22,0,0,Math.PI*2);ctx.fill();
       ctx.restore();
     }
@@ -293,40 +298,42 @@ class Flower{
       ctx.restore();
     }
 
-    ctx.shadowBlur=12;ctx.shadowColor="#ff8f00";ctx.fillStyle="#3e2723";
+    ctx.fillStyle="#3e2723";
     ctx.beginPath();ctx.arc(0,0,14,0,Math.PI*2);ctx.fill();
     ctx.fillStyle="#5d4037";
     ctx.beginPath();ctx.arc(0,0,9,0,Math.PI*2);ctx.fill();
-    ctx.shadowBlur=0;
     
     ctx.restore();
   }
 }
 
-function burst(x,y,n=30){
+function burst(x,y,n=15){
   for(let i=0;i<n;i++){
-    let a=rand(0,Math.PI*2),v=rand(1.5,6);
-    particles.push(new Particle(x,y,Math.cos(a)*v,Math.sin(a)*v,rand(1.5,3.5),rand(40,90),Math.random()>0.3?"#ffd700":"#fff59d"));
+    let a=rand(0,Math.PI*2),v=rand(1.5,5);
+    addParticle(new Particle(x,y,Math.cos(a)*v,Math.sin(a)*v,rand(1.5,3),rand(25,60),Math.random()>0.3?"#ffd700":"#fff59d"));
   }
 }
 
 function spawnFlower(x,y){
-  let f=new Flower(x,Math.min(y,H-60),rand(0.6,1.1));
+  let f=new Flower(x,Math.min(y,H-60),rand(0.6,1.0));
   flowers.push(f);
+  if(flowers.length > MAX_FLOWERS) {
+    flowers.shift();
+  }
 }
 
 function seed(){
   flowers=[];
-  for(let i=0;i<18;i++){
-    spawnFlower(rand(30,W-30),rand(H*0.5,H-50));
+  for(let i=0;i<12;i++){
+    spawnFlower(rand(30,W-30),rand(H*0.55,H-50));
   }
-  for(let i=0;i<80;i++){
+  for(let i=0;i<45;i++){
     fireflies.push({
-      x:rand(0,W),y:rand(0,H),r:rand(0.8,2.5),
+      x:rand(0,W),y:rand(0,H),r:rand(0.8,2.2),
       a:rand(0,Math.PI*2),s:rand(0.005,0.02)
     });
   }
-  for(let i=0;i<3;i++) shootingStars.push(new ShootingStar());
+  for(let i=0;i<2;i++) shootingStars.push(new ShootingStar());
 }
 
 function drawBackground(){
@@ -346,19 +353,19 @@ function drawBackground(){
     f.y-=0.3; if(f.y<0) f.y=H;
     let a=0.3+0.5*Math.sin(f.a);
     ctx.globalAlpha=a;ctx.fillStyle="#ffe500";
-    ctx.shadowBlur=10;ctx.shadowColor="#ffd000";
     ctx.beginPath();ctx.arc(f.x,f.y,f.r,0,Math.PI*2);ctx.fill();
   });
-  ctx.globalAlpha=1;ctx.shadowBlur=0;
+  ctx.globalAlpha=1;
 }
 
 function heartParticles(){
-  for(let i=0;i<2;i++){
+  if(particles.length >= MAX_PARTICLES) return;
+  for(let i=0;i<1;i++){
     let t=rand(0,Math.PI*2);
     let x=16*Math.pow(Math.sin(t),3);
     let y=-(13*Math.cos(t)-5*Math.cos(2*t)-2*Math.cos(3*t)-Math.cos(4*t));
     let scale=Math.min(W,H)/48;
-    particles.push(new Particle(W/2+x*scale,H*0.28+y*scale,rand(-0.2,0.2),-rand(0.2,0.6),rand(1,2.5),rand(50,110),"#ffd700"));
+    addParticle(new Particle(W/2+x*scale,H*0.28+y*scale,rand(-0.2,0.2),-rand(0.2,0.6),rand(1,2.5),rand(35,70),"#ffd700"));
   }
 }
 
@@ -368,7 +375,7 @@ function animate(){
 
   drawBackground();
 
-  if(started && Math.random()<0.25) heartParticles();
+  if(started && Math.random()<0.2) heartParticles();
 
   ctx.save();
   ctx.translate((mouse.x-W/2)*-0.015,(mouse.y-H/2)*-0.01);
@@ -390,23 +397,25 @@ function startExperience(){
   document.getElementById("start").style.display="none";
   document.getElementById("letterBtn").style.display="inline-flex";
   document.querySelector(".tip").textContent="✨ Crea flores y destellos ✨";
-  document.getElementById("subtitle").textContent="Haz florecer todo este mundo para ti, como florece la felicidad en mí por ti...";
+  document.getElementById("subtitle").textContent="Haz florecer todo este mundo para ti, como florece la felicidad en mi por ti...";
   seed();
-  for(let i=0;i<6;i++) burst(W/2,H/2,25);
-  playAudio();
+  for(let i=0;i<4;i++) burst(W/2,H/2,15);
+  playMusic();
 }
 
 document.getElementById("start").onclick=startExperience;
 
 document.getElementById("letterBtn").onclick=()=>{
   document.getElementById("modal").classList.add("show");
-  burst(W/2,H/2,80);
+  burst(W/2,H/2,30);
 };
 
 function closeLetter(){document.getElementById("modal").classList.remove("show")}
 document.getElementById("modal").addEventListener("click",e=>{
   if(e.target.id==="modal")closeLetter();
 });
+
+document.getElementById("music").onclick=toggleMusic;
 
 animate();
 </script>
