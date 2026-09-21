@@ -2,615 +2,391 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>21 de Septiembre 🌻</title>
-
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<title>Para ti 🌻 | Flores Amarillas</title>
 <style>
-/* =====================================================
-   ESTILOS GENERALES
-===================================================== */
+*{box-sizing:border-box;margin:0;padding:0;user-select:none;-webkit-user-select:none}
+html,body{width:100%;height:100%;overflow:hidden;background:#030108;color:#fff5ad;font-family:'Segoe UI',Roboto,Helvetica,Arial,sans-serif}
+canvas{position:fixed;inset:0;width:100%;height:100%;z-index:0}
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+#ui{position:fixed;inset:0;z-index:2;pointer-events:none;display:flex;flex-direction:column;justify-content:space-between;padding:25px;text-align:center}
+.hero{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:12px}
+
+.date{font-size:clamp(12px,2vw,16px);letter-spacing:8px;text-transform:uppercase;color:#ffe600;text-shadow:0 0 12px #ffb700,0 0 25px #ff9800;font-weight:600}
+h1{font-family:'Georgia',serif;font-size:clamp(45px,9vw,110px);line-height:0.9;color:#fffbca;text-shadow:0 0 15px #fff,0 0 35px #ffd000,0 0 75px #ff8c00;animation:glow 2.5s infinite alternate ease-in-out;margin:8px 0}
+@keyframes glow{
+  0%{transform:scale(0.98);filter:brightness(1);text-shadow:0 0 15px #fff,0 0 35px #ffd000,0 0 75px #ff8c00}
+  100%{transform:scale(1.02);filter:brightness(1.3);text-shadow:0 0 22px #fff,0 0 45px #ffe600,0 0 100px #ff6f00}
 }
 
-body {
-    background: #000;
-    color: white;
-    font-family: "Trebuchet MS", Arial, sans-serif;
-    overflow-x: hidden;
-    min-height: 100vh;
-}
+.subtitle{max-width:620px;font-size:clamp(14px,2.2vw,19px);line-height:1.6;color:#fff8db;text-shadow:0 0 12px rgba(255,208,0,0.8);margin-bottom:15px;padding:0 10px}
 
-/* Fondo con brillo */
-body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    background:
-        radial-gradient(circle at center, rgba(255, 200, 0, 0.12), transparent 35%),
-        radial-gradient(circle at 20% 80%, rgba(255, 215, 0, 0.08), transparent 25%),
-        radial-gradient(circle at 80% 20%, rgba(255, 215, 0, 0.08), transparent 25%);
-    pointer-events: none;
-    z-index: -2;
-}
+/* Botones con estilo Neón */
+.btn-action{pointer-events:auto;border:2px solid #ffd000;background:linear-gradient(135deg,rgba(255,210,0,0.2),rgba(255,140,0,0.3));color:#fff8c2;padding:15px 35px;border-radius:50px;font-size:17px;font-weight:bold;cursor:pointer;box-shadow:0 0 25px rgba(255,208,0,0.5),inset 0 0 15px rgba(255,210,0,0.3);backdrop-filter:blur(5px);transition:all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);display:inline-flex;align-items:center;gap:10px}
+.btn-action:hover{transform:translateY(-3px) scale(1.06);background:linear-gradient(135deg,#ffd000,#ff9800);color:#1c1200;box-shadow:0 0 40px #ffd000,0 0 80px #ff8c00}
+.btn-action:active{transform:translateY(1px) scale(0.98)}
 
-/* =====================================================
-   PARTÍCULAS
-===================================================== */
+#letterBtn{display:none;background:linear-gradient(135deg,#ffe500,#ff9100);color:#1f1300;box-shadow:0 0 35px #ffd000,0 0 70px rgba(255,140,0,0.6)}
 
-.particles {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: -1;
-}
+.tip{font-size:12px;color:#ffea7a;opacity:0.8;letter-spacing:1px;animation:pulseTip 2s infinite}
+@keyframes pulseTip{0%,100%{opacity:0.5}50%{opacity:1}}
 
-.particle {
-    position: absolute;
-    width: 3px;
-    height: 3px;
-    background: #ffd900;
-    border-radius: 50%;
-    box-shadow: 0 0 8px #ffd900;
-    animation: caer linear infinite;
-}
+/* Botón de Música y Contador */
+#music{position:fixed;right:20px;bottom:20px;z-index:10;border:2px solid #ffd000;background:rgba(20,15,0,0.85);color:#ffe46a;border-radius:50%;width:50px;height:50px;font-size:20px;cursor:pointer;box-shadow:0 0 20px rgba(255,208,0,0.6);backdrop-filter:blur(8px);transition:0.3s;display:flex;align-items:center;justify-content:center}
+#music:hover{transform:scale(1.15);background:#ffd000;color:#000;box-shadow:0 0 30px #ffd000}
 
-@keyframes caer {
-    0% {
-        transform: translateY(-10vh) scale(0.5);
-        opacity: 0;
-    }
+#counter{position:fixed;left:20px;bottom:20px;font-size:13px;color:#ffe875;background:rgba(15,10,2,0.7);padding:8px 16px;border-radius:20px;border:1px solid rgba(255,208,0,0.4);box-shadow:0 0 15px rgba(255,208,0,0.2);z-index:3;backdrop-filter:blur(5px)}
 
-    20% {
-        opacity: 1;
-    }
+/* Modal Carta Pergamino */
+#modal{position:fixed;inset:0;z-index:100;background:rgba(5,2,10,0.88);backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;visibility:hidden;transition:all 0.45s ease}
+#modal.show{opacity:1;visibility:visible}
 
-    100% {
-        transform: translateY(110vh) scale(1.2);
-        opacity: 0;
-    }
-}
+.envelope{position:relative;width:min(620px,92vw);max-height:85vh;overflow-y:auto;background:linear-gradient(145deg,#fff8d6,#ffe885,#ffd043);color:#332100;border-radius:20px;padding:45px 32px 35px;box-shadow:0 0 50px #ffd000,0 0 100px rgba(255,140,0,0.5),inset 0 0 20px rgba(255,255,255,0.8);border:2px solid #fff;transform:translateY(60px) scale(0.85);transition:all 0.5s cubic-bezier(0.175,0.885,0.32,1.275)}
+#modal.show .envelope{transform:translateY(0) scale(1)}
 
-/* =====================================================
-   CONTENEDOR PRINCIPAL
-===================================================== */
+.close{position:absolute;right:18px;top:15px;border:none;background:rgba(90,60,0,0.1);width:36px;height:36px;border-radius:50%;font-size:22px;color:#5a3f00;cursor:pointer;transition:0.2s;display:flex;align-items:center;justify-content:center}
+.close:hover{background:#5a3f00;color:#fff}
 
-.container {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 40px 20px;
-}
+.envelope h2{font:bold 30px 'Georgia',serif;color:#7a5000;margin-bottom:20px;text-align:center;text-shadow:0 2px 4px rgba(255,255,255,0.6)}
+.envelope p{font-size:16.5px;line-height:1.8;margin-bottom:15px;color:#3b2800}
+.signature{font:26px cursive;color:#7a5000;margin-top:30px;text-align:right}
 
-/* =====================================================
-   TÍTULO
-===================================================== */
-
-.small-title {
-    color: #ffe66d;
-    font-size: 1.1rem;
-    letter-spacing: 5px;
-    margin-bottom: 15px;
-    text-transform: uppercase;
-    text-shadow: 0 0 15px #ffd000;
-}
-
-h1 {
-    font-size: clamp(2.5rem, 8vw, 6rem);
-    color: #fff2a8;
-    font-family: Georgia, serif;
-    text-shadow:
-        0 0 5px #fff,
-        0 0 15px #ffd000,
-        0 0 35px #ffbf00,
-        0 0 70px #ff9900;
-    animation: brillo 2s infinite alternate;
-}
-
-@keyframes brillo {
-    from {
-        text-shadow:
-            0 0 5px #fff,
-            0 0 15px #ffd000,
-            0 0 30px #ffb700;
-    }
-
-    to {
-        text-shadow:
-            0 0 10px #fff,
-            0 0 25px #ffd000,
-            0 0 55px #ff9900;
-    }
-}
-
-.subtitle {
-    margin-top: 15px;
-    color: #fff8cf;
-    font-size: clamp(1rem, 3vw, 1.4rem);
-    max-width: 700px;
-    line-height: 1.7;
-}
-
-/* =====================================================
-   SOL / CENTRO
-===================================================== */
-
-.sun {
-    margin: 35px auto;
-    width: 130px;
-    height: 130px;
-    border-radius: 50%;
-    background: radial-gradient(circle, #fffbd0 0%, #ffe000 35%, #ffae00 70%, transparent 72%);
-    box-shadow:
-        0 0 25px #ffd000,
-        0 0 60px #ffc400,
-        0 0 110px rgba(255, 193, 7, 0.6);
-    animation: pulsar 3s ease-in-out infinite;
-}
-
-@keyframes pulsar {
-    0%, 100% {
-        transform: scale(1);
-    }
-
-    50% {
-        transform: scale(1.08);
-    }
-}
-
-/* =====================================================
-   FLORES
-===================================================== */
-
-.flowers {
-    position: relative;
-    width: 100%;
-    max-width: 900px;
-    height: 130px;
-    margin-top: 5px;
-}
-
-.flower {
-    position: absolute;
-    font-size: 55px;
-    filter: drop-shadow(0 0 10px #ffd000);
-    animation: flotar 4s ease-in-out infinite;
-}
-
-.flower:nth-child(1) {
-    left: 5%;
-    bottom: 5px;
-    animation-delay: 0s;
-}
-
-.flower:nth-child(2) {
-    left: 20%;
-    bottom: 15px;
-    font-size: 45px;
-    animation-delay: 1s;
-}
-
-.flower:nth-child(3) {
-    left: 42%;
-    bottom: 0;
-    font-size: 65px;
-    animation-delay: 0.5s;
-}
-
-.flower:nth-child(4) {
-    right: 20%;
-    bottom: 20px;
-    font-size: 48px;
-    animation-delay: 1.5s;
-}
-
-.flower:nth-child(5) {
-    right: 5%;
-    bottom: 5px;
-    animation-delay: 2s;
-}
-
-@keyframes flotar {
-    0%, 100% {
-        transform: translateY(0) rotate(-5deg);
-    }
-
-    50% {
-        transform: translateY(-15px) rotate(5deg);
-    }
-}
-
-/* =====================================================
-   BOTÓN CARTA
-===================================================== */
-
-.letter-button {
-    margin-top: 20px;
-    padding: 16px 32px;
-    border: 2px solid #ffd000;
-    border-radius: 50px;
-    background: rgba(255, 204, 0, 0.08);
-    color: #fff5a6;
-    font-size: 1.1rem;
-    font-weight: bold;
-    cursor: pointer;
-    box-shadow:
-        0 0 15px rgba(255, 208, 0, 0.5),
-        inset 0 0 15px rgba(255, 208, 0, 0.1);
-    transition: all 0.3s ease;
-}
-
-.letter-button:hover {
-    transform: scale(1.07);
-    background: #ffd000;
-    color: #171000;
-    box-shadow:
-        0 0 25px #ffd000,
-        0 0 60px rgba(255, 193, 7, 0.6);
-}
-
-/* =====================================================
-   CARTA / MODAL
-===================================================== */
-
-.modal {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.82);
-    backdrop-filter: blur(8px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-
-    opacity: 0;
-    visibility: hidden;
-    transition: 0.4s;
-    z-index: 100;
-}
-
-.modal.active {
-    opacity: 1;
-    visibility: visible;
-}
-
-.letter {
-    position: relative;
-    width: min(650px, 100%);
-    max-height: 85vh;
-    overflow-y: auto;
-    padding: 45px 35px;
-    border-radius: 12px;
-
-    background:
-        linear-gradient(
-            rgba(255, 249, 210, 0.97),
-            rgba(255, 238, 160, 0.97)
-        );
-
-    color: #332700;
-
-    box-shadow:
-        0 0 30px #ffd000,
-        0 0 100px rgba(255, 193, 7, 0.4);
-
-    transform: scale(0.7) translateY(50px);
-    transition: 0.5s;
-}
-
-.modal.active .letter {
-    transform: scale(1) translateY(0);
-}
-
-.letter h2 {
-    font-family: Georgia, serif;
-    font-size: 2.2rem;
-    color: #8b6500;
-    margin-bottom: 25px;
-}
-
-.letter p {
-    font-size: 1.1rem;
-    line-height: 1.9;
-    margin-bottom: 18px;
-}
-
-.signature {
-    margin-top: 30px;
-    font-family: cursive;
-    font-size: 1.5rem;
-    color: #9c7200;
-}
-
-.close {
-    position: absolute;
-    top: 12px;
-    right: 18px;
-
-    border: none;
-    background: transparent;
-    color: #654b00;
-
-    font-size: 30px;
-    cursor: pointer;
-}
-
-/* =====================================================
-   REPRODUCTOR
-===================================================== */
-
-.music-message {
-    margin-top: 25px;
-    color: #c9ad40;
-    font-size: 0.85rem;
-}
-
-/* =====================================================
-   RESPONSIVE
-===================================================== */
-
-@media (max-width: 600px) {
-
-    .container {
-        padding: 30px 15px;
-    }
-
-    .sun {
-        width: 100px;
-        height: 100px;
-    }
-
-    .flower {
-        font-size: 38px;
-    }
-
-    .letter {
-        padding: 40px 22px;
-    }
-
-    .letter h2 {
-        font-size: 1.8rem;
-    }
-
-    .letter p {
-        font-size: 1rem;
-    }
+@media(max-width:600px){
+  h1{font-size:52px}
+  .subtitle{font-size:14px}
+  .envelope{padding:35px 22px 25px}
+  .envelope p{font-size:15px}
 }
 </style>
 </head>
-
 <body>
 
-<!-- =====================================================
-     PARTÍCULAS
-===================================================== -->
+<canvas id="canvas"></canvas>
 
-<div class="particles" id="particles"></div>
-
-
-<!-- =====================================================
-     CONTENIDO PRINCIPAL
-===================================================== -->
-
-<main class="container">
-
-    <div class="small-title">
-        21 de Septiembre
-    </div>
-
-    <h1>🌻 Flores Amarillas 🌻</h1>
-
-    <p class="subtitle">
-        Porque hay personas que hacen que hasta los días
-        más normales florezcan. 💛
-    </p>
-
-    <div class="sun"></div>
-
-    <div class="flowers">
-        <div class="flower">🌻</div>
-        <div class="flower">🌼</div>
-        <div class="flower">🌻</div>
-        <div class="flower">🌼</div>
-        <div class="flower">🌻</div>
-    </div>
-
-
-    <!-- BOTÓN DE LA CARTA -->
-
-    <button class="letter-button" onclick="abrirCarta()">
-        💌 Abrir mi carta
-    </button>
-
-    <p class="music-message">
-        🎵 Una canción para ti...
-    </p>
-
-</main>
-
-
-<!-- =====================================================
-     CARTA
-     
-     ✏️ EDITA LA CARTA AQUÍ
-     
-     Busca: "INICIO DE LA CARTA"
-===================================================== -->
-
-<div class="modal" id="modal">
-
-    <div class="letter">
-
-        <button class="close" onclick="cerrarCarta()">
-            ×
-        </button>
-
-        <h2>Para ti 🌻</h2>
-
-        <!-- ===== INICIO DE LA CARTA ===== -->
-
-        <p>
-            Hola, mi amor. 💛
-        </p>
-
-        <p>
-            Hoy, 21 de septiembre, quería regalarte algo
-            diferente. No solamente unas flores amarillas,
-            sino también unas palabras que salen directamente
-            de mi corazón.
-        </p>
-
-        <p>
-            Desde que llegaste a mi vida, hay momentos que
-            tienen un significado diferente. Tu sonrisa,
-            tu forma de ser y cada pequeño detalle tuyo
-            hacen que mis días sean mucho más bonitos.
-        </p>
-
-        <p>
-            Espero que estas flores representen todo el
-            cariño que siento por ti y que cada vez que
-            veas una flor amarilla recuerdes que hay alguien
-            que piensa en ti con muchísimo amor. 🌻
-        </p>
-
-        <p>
-            Gracias por existir y por hacer mi mundo un
-            poquito más bonito.
-        </p>
-
-        <p>
-            Te quiero muchísimo. 💛
-        </p>
-
-        <div class="signature">
-            Con todo mi cariño,<br>
-            Tu persona especial ❤️
-        </div>
-
-        <!-- ===== FIN DE LA CARTA ===== -->
-
-    </div>
-
+<div id="ui">
+  <div class="hero" id="hero">
+    <div class="date">✨ 21 de septiembre ✨</div>
+    <h1>Flores<br>Amarillas 🌻</h1>
+    <div class="subtitle" id="subtitle">Hoy no quería darte una sola flor, sino un universo lleno de luz pensado solo para ti...</div>
+    <button class="btn-action" id="start">✨ Entra a mi mundo 🌻</button>
+    <button class="btn-action" id="letterBtn">💌 Abrir mi mensaje especial</button>
+    <div class="tip">Mueve el cursor · toca la pantalla · haz florecer el cielo</div>
+  </div>
 </div>
 
+<button id="music">🔇</button>
+<div id="counter">🌻 0 flores florecidas</div>
 
-<!-- =====================================================
-     MÚSICA
-===================================================== -->
+<div id="modal">
+  <div class="envelope">
+    <button class="close" onclick="closeLetter()">×</button>
 
-<audio id="musica" autoplay loop>
-    <source src="musica.mp3" type="audio/mpeg">
+    <h2>Para ti, mi persona favorita 🌻💛</h2>
+
+    <!-- =================================================
+         ✏️ EDITA TU CARTA ENTRE ESTAS DOS MARCAS
+         ================================================= -->
+
+    <p>Hola, mi amor. 💛</p>
+
+    <p>
+      Hoy, 21 de septiembre, quería regalarte algo completamente diferente y especial.
+      No solamente unas flores amarillas tradicionales, sino todo un universo mágico iluminado para ti.
+    </p>
+
+    <p>
+      Cada destello, cada pétalo y cada girasol que ves en esta pantalla representan un pensamiento, un momento feliz a tu lado y una razón por la cual iluminas mi vida.
+    </p>
+
+    <p>
+      Gracias por existir, por formar parte de mi camino y por hacer que incluso los días más comunes se vuelvan inolvidables.
+    </p>
+
+    <p>
+      Espero que este detalle te recuerde siempre lo mucho que te quiero y lo especial que eres para mí. ¡Feliz día de las flores amarillas! 🌻✨
+    </p>
+
+    <div class="signature">
+      Con todo mi amor,<br>
+      Tu persona especial ❤️
+    </div>
+
+    <!-- ===== FIN DE LA CARTA ===== -->
+  </div>
+</div>
+
+<audio id="audio" loop>
+  <source src="musica.mp3" type="audio/mpeg">
 </audio>
 
-
 <script>
+const canvas=document.getElementById("canvas");
+const ctx=canvas.getContext("2d");
+let W,H,dpr;
+let started=false, mouse={x:0,y:0,tx:0,ty:0};
+let particles=[], flowers=[], fireflies=[], shootingStars=[];
+let flowerCount=0;
 
-/* =====================================================
-   PARTÍCULAS DORADAS
-===================================================== */
+function resize(){
+  dpr=Math.min(devicePixelRatio||1,2);
+  W=innerWidth;H=innerHeight;
+  canvas.width=W*dpr;canvas.height=H*dpr;
+  canvas.style.width=W+"px";canvas.style.height=H+"px";
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+}
+addEventListener("resize",resize); resize();
 
-const particles = document.getElementById("particles");
+addEventListener("pointermove",e=>{
+  mouse.tx=e.clientX;mouse.ty=e.clientY;
+  if(started && Math.random()<0.4){
+    particles.push(new Particle(e.clientX,e.clientY,(Math.random()-0.5)*1.5,(Math.random()-0.5)*1.5,rand(1,2.5),rand(20,45),"#ffea00"));
+  }
+});
 
-for (let i = 0; i < 140; i++) {
+addEventListener("pointerdown",e=>{
+  if(e.target.tagName==='BUTTON' || e.target.closest('#modal')) return;
+  if(!started) return;
+  burst(e.clientX,e.clientY,35);
+  spawnFlower(e.clientX,e.clientY);
+});
 
-    const particle = document.createElement("div");
+function rand(a,b){return a+Math.random()*(b-a)}
 
-    particle.classList.add("particle");
-
-    particle.style.left = Math.random() * 100 + "%";
-
-    particle.style.animationDuration =
-        (Math.random() * 8 + 5) + "s";
-
-    particle.style.animationDelay =
-        (Math.random() * 8) + "s";
-
-    particle.style.width =
-        (Math.random() * 3 + 1) + "px";
-
-    particle.style.height =
-        particle.style.width;
-
-    particles.appendChild(particle);
+// Clase Partículas Brillantes
+class Particle{
+  constructor(x,y,vx,vy,size,life,color){
+    this.x=x;this.y=y;this.vx=vx;this.vy=vy;
+    this.size=size;this.life=life;this.max=life;this.color=color;
+  }
+  update(){
+    this.x+=this.vx;this.y+=this.vy;this.vy+=0.01;
+    this.life--;
+  }
+  draw(){
+    let a=Math.max(0,this.life/this.max);
+    ctx.globalAlpha=a;
+    ctx.fillStyle=this.color;
+    ctx.shadowBlur=12;ctx.shadowColor=this.color;
+    ctx.beginPath();ctx.arc(this.x,this.y,this.size,0,Math.PI*2);ctx.fill();
+    ctx.shadowBlur=0;ctx.globalAlpha=1;
+  }
 }
 
-
-/* =====================================================
-   ABRIR CARTA
-===================================================== */
-
-function abrirCarta() {
-
-    document.getElementById("modal")
-        .classList.add("active");
-
+// Clase Estrellas Fugaces
+class ShootingStar{
+  constructor(){this.reset();}
+  reset(){
+    this.x=rand(0,W*0.8);
+    this.y=rand(0,H*0.4);
+    this.len=rand(80,150);
+    this.speed=rand(6,12);
+    this.size=rand(1,2.5);
+    this.active=true;
+  }
+  update(){
+    this.x+=this.speed;
+    this.y+=this.speed*0.5;
+    if(this.x>W || this.y>H) this.reset();
+  }
+  draw(){
+    if(!this.active) return;
+    let grad=ctx.createLinearGradient(this.x,this.y,this.x-this.len,this.y-this.len*0.5);
+    grad.addColorStop(0,"rgba(255,235,59,1)");
+    grad.addColorStop(1,"rgba(255,235,59,0)");
+    ctx.strokeStyle=grad;
+    ctx.lineWidth=this.size;
+    ctx.beginPath();
+    ctx.moveTo(this.x,this.y);
+    ctx.lineTo(this.x-this.len,this.y-this.len*0.5);
+    ctx.stroke();
+  }
 }
 
+// Clase Girasol Ilustrado
+class Flower{
+  constructor(x,y,scale=1){
+    this.x=x;this.y=y;this.scale=scale;
+    this.grow=0;this.life=1;
+    this.phase=rand(0,Math.PI*2);
+    flowerCount++;
+    document.getElementById("counter").textContent=`🌻 ${flowerCount} flores florecidas`;
+  }
+  update(){
+    this.grow=Math.min(1,this.grow+0.03);
+    this.phase+=0.02;
+  }
+  draw(){
+    let s=this.scale*this.grow;
+    let sway=Math.sin(this.phase)*6;
+    ctx.save();
+    ctx.translate(this.x+sway,this.y);
+    ctx.scale(s,s);
 
-/* =====================================================
-   CERRAR CARTA
-===================================================== */
+    // Tallo y Hojas
+    ctx.strokeStyle="#2e5a1c";ctx.lineWidth=4;
+    ctx.beginPath();ctx.moveTo(0,60);ctx.quadraticCurveTo(-8,25,0,-5);ctx.stroke();
+    
+    // Hojas
+    ctx.fillStyle="#3d7327";
+    ctx.beginPath();ctx.ellipse(-12,25,12,6,-Math.PI/4,0,Math.PI*2);ctx.fill();
+    ctx.beginPath();ctx.ellipse(12,35,12,6,Math.PI/4,0,Math.PI*2);ctx.fill();
 
-function cerrarCarta() {
-
-    document.getElementById("modal")
-        .classList.remove("active");
-
-}
-
-
-/* =====================================================
-   CERRAR AL HACER CLICK FUERA DE LA CARTA
-===================================================== */
-
-document.getElementById("modal").addEventListener("click", function(e) {
-
-    if (e.target === this) {
-        cerrarCarta();
+    // Pétalos exteriores
+    for(let i=0;i<16;i++){
+      let a=i*Math.PI*2/16;
+      ctx.save();ctx.rotate(a);
+      let g=ctx.createLinearGradient(0,0,0,-32);
+      g.addColorStop(0,"#ff9800");g.addColorStop(0.5,"#ffd600");g.addColorStop(1,"#fff59d");
+      ctx.fillStyle=g;ctx.shadowBlur=10;ctx.shadowColor="#ffb300";
+      ctx.beginPath();ctx.ellipse(0,-20,7,22,0,0,Math.PI*2);ctx.fill();
+      ctx.restore();
     }
 
-});
+    // Pétalos interiores
+    for(let i=0;i<12;i++){
+      let a=(i*Math.PI*2/12) + 0.2;
+      ctx.save();ctx.rotate(a);
+      let g=ctx.createLinearGradient(0,0,0,-24);
+      g.addColorStop(0,"#f57c00");g.addColorStop(1,"#ffeb3b");
+      ctx.fillStyle=g;
+      ctx.beginPath();ctx.ellipse(0,-16,6,16,0,0,Math.PI*2);ctx.fill();
+      ctx.restore();
+    }
 
+    // Centro Semillas
+    ctx.shadowBlur=12;ctx.shadowColor="#ff8f00";ctx.fillStyle="#3e2723";
+    ctx.beginPath();ctx.arc(0,0,14,0,Math.PI*2);ctx.fill();
+    ctx.fillStyle="#5d4037";
+    ctx.beginPath();ctx.arc(0,0,9,0,Math.PI*2);ctx.fill();
+    ctx.shadowBlur=0;
+    
+    ctx.restore();
+  }
+}
 
-/* =====================================================
-   MÚSICA
+function burst(x,y,n=30){
+  for(let i=0;i<n;i++){
+    let a=rand(0,Math.PI*2),v=rand(1.5,6);
+    particles.push(new Particle(x,y,Math.cos(a)*v,Math.sin(a)*v,rand(1.5,3.5),rand(40,90),Math.random()>0.3?"#ffd700":"#fff59d"));
+  }
+}
 
-   Algunos navegadores bloquean automáticamente
-   el audio con sonido.
+function spawnFlower(x,y){
+  let f=new Flower(x,Math.min(y,H-60),rand(0.6,1.1));
+  flowers.push(f);
+}
 
-   Intentamos reproducirlo automáticamente.
-   Si el navegador lo bloquea, comenzará cuando
-   la persona haga el primer clic/tap.
-===================================================== */
-
-const musica = document.getElementById("musica");
-
-window.addEventListener("load", function() {
-
-    musica.volume = 0.7;
-
-    musica.play().catch(() => {
-        console.log("El navegador requiere una interacción para reproducir la música.");
+function seed(){
+  flowers=[];
+  // Flores iniciales distribuidas
+  for(let i=0;i<18;i++){
+    spawnFlower(rand(30,W-30),rand(H*0.5,H-50));
+  }
+  // Luciérnagas
+  for(let i=0;i<80;i++){
+    fireflies.push({
+      x:rand(0,W),y:rand(0,H),r:rand(0.8,2.5),
+      a:rand(0,Math.PI*2),s:rand(0.005,0.02)
     });
+  }
+  // Estrellas fugaces
+  for(let i=0;i<3;i++) shootingStars.push(new ShootingStar());
+}
 
+function drawBackground(){
+  // Cielo Espacial / Galaxia
+  let g=ctx.createRadialGradient(W/2,H*0.4,10,W/2,H*0.5,Math.max(W,H)*0.7);
+  g.addColorStop(0,"#3a2c00");g.addColorStop(0.35,"#120c02");g.addColorStop(1,"#020105");
+  ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+
+  // Estrellas fugaces
+  shootingStars.forEach(s=>{s.update();s.draw()});
+
+  // Sol/Luna centelleante
+  let sun=ctx.createRadialGradient(W/2,H*0.42,5,W/2,H*0.42,120);
+  sun.addColorStop(0,"#ffffff");sun.addColorStop(0.25,"#fff59d");
+  sun.addColorStop(0.55,"#ffb300");sun.addColorStop(1,"rgba(255,179,0,0)");
+  ctx.fillStyle=sun;ctx.beginPath();ctx.arc(W/2,H*0.42,120,0,Math.PI*2);ctx.fill();
+
+  // Luciérnagas flotantes
+  fireflies.forEach(f=>{
+    f.a+=f.s;
+    f.y-=0.3; if(f.y<0) f.y=H;
+    let a=0.3+0.5*Math.sin(f.a);
+    ctx.globalAlpha=a;ctx.fillStyle="#ffe500";
+    ctx.shadowBlur=10;ctx.shadowColor="#ffd000";
+    ctx.beginPath();ctx.arc(f.x,f.y,f.r,0,Math.PI*2);ctx.fill();
+  });
+  ctx.globalAlpha=1;ctx.shadowBlur=0;
+}
+
+function heartParticles(){
+  for(let i=0;i<2;i++){
+    let t=rand(0,Math.PI*2);
+    let x=16*Math.pow(Math.sin(t),3);
+    let y=-(13*Math.cos(t)-5*Math.cos(2*t)-2*Math.cos(3*t)-Math.cos(4*t));
+    let scale=Math.min(W,H)/48;
+    particles.push(new Particle(W/2+x*scale,H*0.28+y*scale,rand(-0.2,0.2),-rand(0.2,0.6),rand(1,2.5),rand(50,110),"#ffd700"));
+  }
+}
+
+function animate(){
+  mouse.x+=(mouse.tx-mouse.x)*0.03;
+  mouse.y+=(mouse.ty-mouse.y)*0.03;
+
+  drawBackground();
+
+  if(started && Math.random()<0.25) heartParticles();
+
+  ctx.save();
+  ctx.translate((mouse.x-W/2)*-0.015,(mouse.y-H/2)*-0.01);
+  flowers.forEach(f=>{f.update();f.draw()});
+  ctx.restore();
+
+  particles=particles.filter(p=>p.life>0);
+  particles.forEach(p=>{p.update();p.draw()});
+
+  // Resplandor del Suelo
+  let ground=ctx.createLinearGradient(0,H*0.75,0,H);
+  ground.addColorStop(0,"rgba(255,200,0,0.18)");ground.addColorStop(1,"rgba(5,2,0,0.8)");
+  ctx.fillStyle=ground;ctx.fillRect(0,H*0.7,W,H*0.3);
+
+  requestAnimationFrame(animate);
+}
+
+function startExperience(){
+  started=true;
+  document.getElementById("start").style.display="none";
+  document.getElementById("letterBtn").style.display="inline-flex";
+  document.querySelector(".tip").textContent="✨ Toca cualquier parte de la pantalla para crear flores y destellos ✨";
+  document.getElementById("subtitle").textContent="Mueve el cursor, toca la pantalla y haz florecer todo este mundo para ti...";
+  seed();
+  for(let i=0;i<6;i++) burst(W/2,H/2,25);
+
+  const audio=document.getElementById("audio");
+  audio.volume=0.7;
+  audio.play().then(()=>document.getElementById("music").textContent="🔊").catch(()=>{});
+}
+
+document.getElementById("start").onclick=startExperience;
+
+document.getElementById("letterBtn").onclick=()=>{
+  document.getElementById("modal").classList.add("show");
+  burst(W/2,H/2,80);
+};
+
+function closeLetter(){document.getElementById("modal").classList.remove("show")}
+document.getElementById("modal").addEventListener("click",e=>{
+  if(e.target.id==="modal")closeLetter();
 });
 
+const audio=document.getElementById("audio");
+document.getElementById("music").onclick=()=>{
+  if(audio.paused){audio.play();document.getElementById("music").textContent="🔊"}
+  else{audio.pause();document.getElementById("music").textContent="🔇"}
+};
 
-document.addEventListener("click", function() {
-
-    musica.play().catch(() => {});
-
-}, { once: true });
-
+animate();
 </script>
-
 </body>
 </html>
