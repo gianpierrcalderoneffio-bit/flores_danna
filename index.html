@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>21 de Septiembre 🌻</title>
+
+<style>
+/* =====================================================
+   ESTILOS GENERALES
+===================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #000;
+    color: white;
+    font-family: "Trebuchet MS", Arial, sans-serif;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+/* Fondo con brillo */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background:
+        radial-gradient(circle at center, rgba(255, 200, 0, 0.12), transparent 35%),
+        radial-gradient(circle at 20% 80%, rgba(255, 215, 0, 0.08), transparent 25%),
+        radial-gradient(circle at 80% 20%, rgba(255, 215, 0, 0.08), transparent 25%);
+    pointer-events: none;
+    z-index: -2;
+}
+
+/* =====================================================
+   PARTÍCULAS
+===================================================== */
+
+.particles {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.particle {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: #ffd900;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #ffd900;
+    animation: caer linear infinite;
+}
+
+@keyframes caer {
+    0% {
+        transform: translateY(-10vh) scale(0.5);
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(110vh) scale(1.2);
+        opacity: 0;
+    }
+}
+
+/* =====================================================
+   CONTENEDOR PRINCIPAL
+===================================================== */
+
+.container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 40px 20px;
+}
+
+/* =====================================================
+   TÍTULO
+===================================================== */
+
+.small-title {
+    color: #ffe66d;
+    font-size: 1.1rem;
+    letter-spacing: 5px;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    text-shadow: 0 0 15px #ffd000;
+}
+
+h1 {
+    font-size: clamp(2.5rem, 8vw, 6rem);
+    color: #fff2a8;
+    font-family: Georgia, serif;
+    text-shadow:
+        0 0 5px #fff,
+        0 0 15px #ffd000,
+        0 0 35px #ffbf00,
+        0 0 70px #ff9900;
+    animation: brillo 2s infinite alternate;
+}
+
+@keyframes brillo {
+    from {
+        text-shadow:
+            0 0 5px #fff,
+            0 0 15px #ffd000,
+            0 0 30px #ffb700;
+    }
+
+    to {
+        text-shadow:
+            0 0 10px #fff,
+            0 0 25px #ffd000,
+            0 0 55px #ff9900;
+    }
+}
+
+.subtitle {
+    margin-top: 15px;
+    color: #fff8cf;
+    font-size: clamp(1rem, 3vw, 1.4rem);
+    max-width: 700px;
+    line-height: 1.7;
+}
+
+/* =====================================================
+   SOL / CENTRO
+===================================================== */
+
+.sun {
+    margin: 35px auto;
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #fffbd0 0%, #ffe000 35%, #ffae00 70%, transparent 72%);
+    box-shadow:
+        0 0 25px #ffd000,
+        0 0 60px #ffc400,
+        0 0 110px rgba(255, 193, 7, 0.6);
+    animation: pulsar 3s ease-in-out infinite;
+}
+
+@keyframes pulsar {
+    0%, 100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.08);
+    }
+}
+
+/* =====================================================
+   FLORES
+===================================================== */
+
+.flowers {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    height: 130px;
+    margin-top: 5px;
+}
+
+.flower {
+    position: absolute;
+    font-size: 55px;
+    filter: drop-shadow(0 0 10px #ffd000);
+    animation: flotar 4s ease-in-out infinite;
+}
+
+.flower:nth-child(1) {
+    left: 5%;
+    bottom: 5px;
+    animation-delay: 0s;
+}
+
+.flower:nth-child(2) {
+    left: 20%;
+    bottom: 15px;
+    font-size: 45px;
+    animation-delay: 1s;
+}
+
+.flower:nth-child(3) {
+    left: 42%;
+    bottom: 0;
+    font-size: 65px;
+    animation-delay: 0.5s;
+}
+
+.flower:nth-child(4) {
+    right: 20%;
+    bottom: 20px;
+    font-size: 48px;
+    animation-delay: 1.5s;
+}
+
+.flower:nth-child(5) {
+    right: 5%;
+    bottom: 5px;
+    animation-delay: 2s;
+}
+
+@keyframes flotar {
+    0%, 100% {
+        transform: translateY(0) rotate(-5deg);
+    }
+
+    50% {
+        transform: translateY(-15px) rotate(5deg);
+    }
+}
+
+/* =====================================================
+   BOTÓN CARTA
+===================================================== */
+
+.letter-button {
+    margin-top: 20px;
+    padding: 16px 32px;
+    border: 2px solid #ffd000;
+    border-radius: 50px;
+    background: rgba(255, 204, 0, 0.08);
+    color: #fff5a6;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow:
+        0 0 15px rgba(255, 208, 0, 0.5),
+        inset 0 0 15px rgba(255, 208, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.letter-button:hover {
+    transform: scale(1.07);
+    background: #ffd000;
+    color: #171000;
+    box-shadow:
+        0 0 25px #ffd000,
+        0 0 60px rgba(255, 193, 7, 0.6);
+}
+
+/* =====================================================
+   CARTA / MODAL
+===================================================== */
+
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.82);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.4s;
+    z-index: 100;
+}
+
+.modal.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.letter {
+    position: relative;
+    width: min(650px, 100%);
+    max-height: 85vh;
+    overflow-y: auto;
+    padding: 45px 35px;
+    border-radius: 12px;
+
+    background:
+        linear-gradient(
+            rgba(255, 249, 210, 0.97),
+            rgba(255, 238, 160, 0.97)
+        );
+
+    color: #332700;
+
+    box-shadow:
+        0 0 30px #ffd000,
+        0 0 100px rgba(255, 193, 7, 0.4);
+
+    transform: scale(0.7) translateY(50px);
+    transition: 0.5s;
+}
+
+.modal.active .letter {
+    transform: scale(1) translateY(0);
+}
+
+.letter h2 {
+    font-family: Georgia, serif;
+    font-size: 2.2rem;
+    color: #8b6500;
+    margin-bottom: 25px;
+}
+
+.letter p {
+    font-size: 1.1rem;
+    line-height: 1.9;
+    margin-bottom: 18px;
+}
+
+.signature {
+    margin-top: 30px;
+    font-family: cursive;
+    font-size: 1.5rem;
+    color: #9c7200;
+}
+
+.close {
+    position: absolute;
+    top: 12px;
+    right: 18px;
+
+    border: none;
+    background: transparent;
+    color: #654b00;
+
+    font-size: 30px;
+    cursor: pointer;
+}
+
+/* =====================================================
+   REPRODUCTOR
+===================================================== */
+
+.music-message {
+    margin-top: 25px;
+    color: #c9ad40;
+    font-size: 0.85rem;
+}
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 600px) {
+
+    .container {
+        padding: 30px 15px;
+    }
+
+    .sun {
+        width: 100px;
+        height: 100px;
+    }
+
+    .flower {
+        font-size: 38px;
+    }
+
+    .letter {
+        padding: 40px 22px;
+    }
+
+    .letter h2 {
+        font-size: 1.8rem;
+    }
+
+    .letter p {
+        font-size: 1rem;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- =====================================================
+     PARTÍCULAS
+===================================================== -->
+
+<div class="particles" id="particles"></div>
+
+
+<!-- =====================================================
+     CONTENIDO PRINCIPAL
+===================================================== -->
+
+<main class="container">
+
+    <div class="small-title">
+        21 de Septiembre
+    </div>
+
+    <h1>🌻 Flores Amarillas 🌻</h1>
+
+    <p class="subtitle">
+        Porque hay personas que hacen que hasta los días
+        más normales florezcan. 💛
+    </p>
+
+    <div class="sun"></div>
+
+    <div class="flowers">
+        <div class="flower">🌻</div>
+        <div class="flower">🌼</div>
+        <div class="flower">🌻</div>
+        <div class="flower">🌼</div>
+        <div class="flower">🌻</div>
+    </div>
+
+
+    <!-- BOTÓN DE LA CARTA -->
+
+    <button class="letter-button" onclick="abrirCarta()">
+        💌 Abrir mi carta
+    </button>
+
+    <p class="music-message">
+        🎵 Una canción para ti...
+    </p>
+
+</main>
+
+
+<!-- =====================================================
+     CARTA
+     
+     ✏️ EDITA LA CARTA AQUÍ
+     
+     Busca: "INICIO DE LA CARTA"
+===================================================== -->
+
+<div class="modal" id="modal">
+
+    <div class="letter">
+
+        <button class="close" onclick="cerrarCarta()">
+            ×
+        </button>
+
+        <h2>Para ti 🌻</h2>
+
+        <!-- ===== INICIO DE LA CARTA ===== -->
+
+        <p>
+            Hola, mi amor. 💛
+        </p>
+
+        <p>
+            Hoy, 21 de septiembre, quería regalarte algo
+            diferente. No solamente unas flores amarillas,
+            sino también unas palabras que salen directamente
+            de mi corazón.
+        </p>
+
+        <p>
+            Desde que llegaste a mi vida, hay momentos que
+            tienen un significado diferente. Tu sonrisa,
+            tu forma de ser y cada pequeño detalle tuyo
+            hacen que mis días sean mucho más bonitos.
+        </p>
+
+        <p>
+            Espero que estas flores representen todo el
+            cariño que siento por ti y que cada vez que
+            veas una flor amarilla recuerdes que hay alguien
+            que piensa en ti con muchísimo amor. 🌻
+        </p>
+
+        <p>
+            Gracias por existir y por hacer mi mundo un
+            poquito más bonito.
+        </p>
+
+        <p>
+            Te quiero muchísimo. 💛
+        </p>
+
+        <div class="signature">
+            Con todo mi cariño,<br>
+            Tu persona especial ❤️
+        </div>
+
+        <!-- ===== FIN DE LA CARTA ===== -->
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     MÚSICA
+===================================================== -->
+
+<audio id="musica" autoplay loop>
+    <source src="musica.mp3" type="audio/mpeg">
+</audio>
+
+
+<script>
+
+/* =====================================================
+   PARTÍCULAS DORADAS
+===================================================== */
+
+const particles = document.getElementById("particles");
+
+for (let i = 0; i < 140; i++) {
+
+    const particle = document.createElement("div");
+
+    particle.classList.add("particle");
+
+    particle.style.left = Math.random() * 100 + "%";
+
+    particle.style.animationDuration =
+        (Math.random() * 8 + 5) + "s";
+
+    particle.style.animationDelay =
+        (Math.random() * 8) + "s";
+
+    particle.style.width =
+        (Math.random() * 3 + 1) + "px";
+
+    particle.style.height =
+        particle.style.width;
+
+    particles.appendChild(particle);
+}
+
+
+/* =====================================================
+   ABRIR CARTA
+===================================================== */
+
+function abrirCarta() {
+
+    document.getElementById("modal")
+        .classList.add("active");
+
+}
+
+
+/* =====================================================
+   CERRAR CARTA
+===================================================== */
+
+function cerrarCarta() {
+
+    document.getElementById("modal")
+        .classList.remove("active");
+
+}
+
+
+/* =====================================================
+   CERRAR AL HACER CLICK FUERA DE LA CARTA
+===================================================== */
+
+document.getElementById("modal").addEventListener("click", function(e) {
+
+    if (e.target === this) {
+        cerrarCarta();
+    }
+
+});
+
+
+/* =====================================================
+   MÚSICA
+
+   Algunos navegadores bloquean automáticamente
+   el audio con sonido.
+
+   Intentamos reproducirlo automáticamente.
+   Si el navegador lo bloquea, comenzará cuando
+   la persona haga el primer clic/tap.
+===================================================== */
+
+const musica = document.getElementById("musica");
+
+window.addEventListener("load", function() {
+
+    musica.volume = 0.7;
+
+    musica.play().catch(() => {
+        console.log("El navegador requiere una interacción para reproducir la música.");
+    });
+
+});
+
+
+document.addEventListener("click", function() {
+
+    musica.play().catch(() => {});
+
+}, { once: true });
+
+</script>
+
+</body>
+</html>
