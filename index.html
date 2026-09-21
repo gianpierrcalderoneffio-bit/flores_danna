@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
-<title>Para ti 🌻 | Flores Amarillas</title>
+<title>Para ti 🌻 | Flores Amarillas para la chica mas hermosa</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;user-select:none;-webkit-user-select:none}
 html,body{width:100%;height:100%;overflow:hidden;background:#030108;color:#fff5ad;font-family:'Segoe UI',Roboto,Helvetica,Arial,sans-serif}
@@ -73,7 +73,7 @@ h1{font-family:'Georgia',serif;font-size:clamp(45px,9vw,110px);line-height:0.9;c
     <div class="subtitle" id="subtitle">Hoy no quería darte una sola flor, sino un universo lleno de luz pensado solo para ti...</div>
     <button class="btn-action" id="start">✨ Entra a mi mundo 🌻</button>
     <button class="btn-action" id="letterBtn">💌 Abrir mi mensaje especial</button>
-    <div class="tip">Mueve el cursor · toca la pantalla · haz florecer el cielo</div>
+    <div class="tip">Toca la pantalla y haz florecer el cielo</div>
   </div>
 </div>
 
@@ -414,8 +414,8 @@ function startExperience(){
   started=true;
   document.getElementById("start").style.display="none";
   document.getElementById("letterBtn").style.display="inline-flex";
-  document.querySelector(".tip").textContent="✨ Toca cualquier parte de la pantalla para crear flores y destellos ✨";
-  document.getElementById("subtitle").textContent="Mueve el cursor, toca la pantalla y haz florecer todo este mundo para ti...";
+  document.querySelector(".tip").textContent="✨ Crea flores y destellos ✨";
+  document.getElementById("subtitle").textContent="Haz florecer todo este mundo para ti, como florece la felicidad en mi por ti...";
   seed();
   for(let i=0;i<6;i++) burst(W/2,H/2,25);
   playMusic();
