@@ -19,20 +19,20 @@ h1{font-family:'Georgia',serif;font-size:clamp(45px,9vw,110px);line-height:0.9;c
   100%{transform:scale(1.02);filter:brightness(1.3);text-shadow:0 0 22px #fff,0 0 45px #ffe600,0 0 100px #ff6f00}
 }
 
-.subtitle{max-width:620px;font-size:clamp(14px,2.2vw,19px);line-height:1.6;color:#fff8db;text-shadow:0 0 12px rgba(255,208,0,0.8);margin-bottom:15px;padding:0 10px}
+.subtitle{max-width:680px;font-size:clamp(14px,2.2vw,19px);line-height:1.6;color:#fff8db;text-shadow:0 0 12px rgba(255,208,0,0.8);margin-bottom:15px;padding:0 10px}
 
 /* Botones con estilo Neón */
-.btn-action{pointer-events:auto;border:2px solid #ffd000;background:linear-gradient(135deg,rgba(255,210,0,0.2),rgba(255,140,0,0.3));color:#fff8c2;padding:15px 35px;border-radius:50px;font-size:17px;font-weight:bold;cursor:pointer;box-shadow:0 0 25px rgba(255,208,0,0.5),inset 0 0 15px rgba(255,210,0,0.3);backdrop-filter:blur(5px);transition:all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);display:inline-flex;align-items:center;gap:10px}
+.btn-action{pointer-events:auto;border:2px solid #ffd000;background:linear-gradient(135deg,rgba(255,210,0,0.25),rgba(255,140,0,0.35));color:#fff8c2;padding:15px 35px;border-radius:50px;font-size:17px;font-weight:bold;cursor:pointer;box-shadow:0 0 25px rgba(255,208,0,0.5),inset 0 0 15px rgba(255,210,0,0.3);backdrop-filter:blur(5px);transition:all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);display:inline-flex;align-items:center;gap:10px}
 .btn-action:hover{transform:translateY(-3px) scale(1.06);background:linear-gradient(135deg,#ffd000,#ff9800);color:#1c1200;box-shadow:0 0 40px #ffd000,0 0 80px #ff8c00}
 .btn-action:active{transform:translateY(1px) scale(0.98)}
 
 #letterBtn{display:none;background:linear-gradient(135deg,#ffe500,#ff9100);color:#1f1300;box-shadow:0 0 35px #ffd000,0 0 70px rgba(255,140,0,0.6)}
 
-.tip{font-size:12px;color:#ffea7a;opacity:0.8;letter-spacing:1px;animation:pulseTip 2s infinite}
-@keyframes pulseTip{0%,100%{opacity:0.5}50%{opacity:1}}
+.tip{font-size:13px;color:#ffea7a;opacity:0.9;letter-spacing:1px;animation:pulseTip 2s infinite}
+@keyframes pulseTip{0%,100%{opacity:0.6}50%{opacity:1}}
 
 /* Botón de Música y Contador */
-#music{position:fixed;right:20px;bottom:20px;z-index:10;border:2px solid #ffd000;background:rgba(20,15,0,0.85);color:#ffe46a;border-radius:50%;width:50px;height:50px;font-size:20px;cursor:pointer;box-shadow:0 0 20px rgba(255,208,0,0.6);backdrop-filter:blur(8px);transition:0.3s;display:flex;align-items:center;justify-content:center}
+#music{position:fixed;right:20px;bottom:20px;z-index:10;border:2px solid #ffd000;background:rgba(20,15,0,0.85);color:#ffe46a;border-radius:50%;width:52px;height:52px;font-size:22px;cursor:pointer;box-shadow:0 0 20px rgba(255,208,0,0.6);backdrop-filter:blur(8px);transition:0.3s;display:flex;align-items:center;justify-content:center}
 #music:hover{transform:scale(1.15);background:#ffd000;color:#000;box-shadow:0 0 30px #ffd000}
 
 #counter{position:fixed;left:20px;bottom:20px;font-size:13px;color:#ffe875;background:rgba(15,10,2,0.7);padding:8px 16px;border-radius:20px;border:1px solid rgba(255,208,0,0.4);box-shadow:0 0 15px rgba(255,208,0,0.2);z-index:3;backdrop-filter:blur(5px)}
@@ -41,21 +41,27 @@ h1{font-family:'Georgia',serif;font-size:clamp(45px,9vw,110px);line-height:0.9;c
 #modal{position:fixed;inset:0;z-index:100;background:rgba(5,2,10,0.88);backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;visibility:hidden;transition:all 0.45s ease}
 #modal.show{opacity:1;visibility:visible}
 
-.envelope{position:relative;width:min(620px,92vw);max-height:85vh;overflow-y:auto;background:linear-gradient(145deg,#fff8d6,#ffe885,#ffd043);color:#332100;border-radius:20px;padding:45px 32px 35px;box-shadow:0 0 50px #ffd000,0 0 100px rgba(255,140,0,0.5),inset 0 0 20px rgba(255,255,255,0.8);border:2px solid #fff;transform:translateY(60px) scale(0.85);transition:all 0.5s cubic-bezier(0.175,0.885,0.32,1.275)}
+.envelope{position:relative;width:min(680px,94vw);max-height:85vh;overflow-y:auto;background:linear-gradient(145deg,#fffbf0,#ffe885,#ffd043);color:#332100;border-radius:24px;padding:45px 35px 35px;box-shadow:0 0 50px #ffd000,0 0 100px rgba(255,140,0,0.5),inset 0 0 20px rgba(255,255,255,0.8);border:2px solid #fff;transform:translateY(60px) scale(0.85);transition:all 0.5s cubic-bezier(0.175,0.885,0.32,1.275)}
 #modal.show .envelope{transform:translateY(0) scale(1)}
 
-.close{position:absolute;right:18px;top:15px;border:none;background:rgba(90,60,0,0.1);width:36px;height:36px;border-radius:50%;font-size:22px;color:#5a3f00;cursor:pointer;transition:0.2s;display:flex;align-items:center;justify-content:center}
+/* Scrollbar personalizada para la carta */
+.envelope::-webkit-scrollbar{width:8px}
+.envelope::-webkit-scrollbar-track{background:rgba(90,60,0,0.1);border-radius:10px}
+.envelope::-webkit-scrollbar-thumb{background:#e0a000;border-radius:10px}
+
+.close{position:absolute;right:18px;top:15px;border:none;background:rgba(90,60,0,0.12);width:36px;height:36px;border-radius:50%;font-size:22px;color:#5a3f00;cursor:pointer;transition:0.2s;display:flex;align-items:center;justify-content:center}
 .close:hover{background:#5a3f00;color:#fff}
 
-.envelope h2{font:bold 30px 'Georgia',serif;color:#7a5000;margin-bottom:20px;text-align:center;text-shadow:0 2px 4px rgba(255,255,255,0.6)}
-.envelope p{font-size:16.5px;line-height:1.8;margin-bottom:15px;color:#3b2800}
-.signature{font:26px cursive;color:#7a5000;margin-top:30px;text-align:right}
+.envelope h2{font:bold 32px 'Georgia',serif;color:#6b4300;margin-bottom:22px;text-align:center;text-shadow:0 2px 4px rgba(255,255,255,0.6)}
+.envelope p{font-size:17px;line-height:1.85;margin-bottom:18px;color:#3b2800;text-align:justify}
+.highlight{color:#8a4d00;font-weight:bold}
+.signature{font:28px cursive;color:#6b4300;margin-top:32px;text-align:right;line-height:1.4}
 
 @media(max-width:600px){
   h1{font-size:52px}
   .subtitle{font-size:14px}
   .envelope{padding:35px 22px 25px}
-  .envelope p{font-size:15px}
+  .envelope p{font-size:15.5px;text-align:left}
 }
 </style>
 </head>
@@ -67,65 +73,103 @@ h1{font-family:'Georgia',serif;font-size:clamp(45px,9vw,110px);line-height:0.9;c
   <div class="hero" id="hero">
     <div class="date">✨ 21 de septiembre ✨</div>
     <h1>Flores<br>Amarillas 🌻</h1>
-    <div class="subtitle" id="subtitle">Hoy no quería darte una sola flor, sino un universo lleno de luz pensado solo para ti...</div>
+    <div class="subtitle" id="subtitle">Hoy no quería darte una sola flor, sino un universo infinito lleno de luz y flores doradas pensado solo para ti...</div>
     <button class="btn-action" id="start">✨ Entra a mi mundo 🌻</button>
     <button class="btn-action" id="letterBtn">💌 Abrir mi mensaje especial</button>
-    <div class="tip">Mueve el cursor · toca la pantalla · haz florecer el cielo</div>
+    <div class="tip">Haz clic o toca la pantalla para encender la música y hacer florecer el cielo</div>
   </div>
 </div>
 
-<button id="music">🔇</button>
+<button id="music" title="Control de Música">🔊</button>
 <div id="counter">🌻 0 flores florecidas</div>
 
 <div id="modal">
   <div class="envelope">
     <button class="close" onclick="closeLetter()">×</button>
 
-    <h2>Para ti, mi persona favorita 🌻💛</h2>
+    <h2>Para ti, el amor de mi vida 🌻💛</h2>
 
-    <!-- =================================================
-         ✏️ EDITA TU CARTA ENTRE ESTAS DOS MARCAS
-         ================================================= -->
-
-    <p>Hola, mi amor. 💛</p>
+    <!-- Carta Ampliada -->
+    <p>Mi cielo hermosa, 💛</p>
 
     <p>
-      Hoy, 21 de septiembre, quería regalarte algo completamente diferente y especial.
-      No solamente unas flores amarillas tradicionales, sino todo un universo mágico iluminado como lo es tu sonrisa.
+      Hoy es <span class="highlight">21 de septiembre</span>, un día donde el mundo entero celebra la primavera y la belleza de regalar flores amarillas. Pero yo no quería traerte algo efímero ni regalarte únicamente un ramo tradicional que con los días se apague. Quería crear algo eterno, mágico y lleno de vida; todo un firmamento que brillara tanto como lo hace tu mirada cada vez que me sonríes.
     </p>
 
     <p>
-      Cada destello, cada pétalo y cada girasol que ves en esta pantalla representan un pensamiento, un momento feliz a tu lado y una razón por la cual iluminas mi vida.
+      El amarillo no es solo un color hermoso; para mí es el tono exacto de la calma que me das, de la calidez con la que abrazas mi corazón y de la luz constante con la que ilumina mi camino cada uno de tus detalles. Cada destello flotante, cada luciérnaga y cada girasol que ves brotar en esta pantalla representa un pensamiento hacia ti, un recuerdo inolvidable a tu lado y una razón más por la cual me siento la persona más afortunada del planeta al tenerte conmigo.
     </p>
 
     <p>
-      Gracias por existir, por formar parte de mi camino y por hacer que incluso los días más comunes se vuelvan inolvidables.
+      A veces me detengo a pensar en todo lo que hemos vivido y no puedo evitar sonreír. Gracias por ser mi lugar seguro, mi paz en los días difíciles, mi risa favorita y la cómplice de todas mis alegrías. Gracias por existir, por llenar de color mis días más oscuros y por enseñarme la forma más pura y sincera de amar.
     </p>
 
     <p>
-      Espero que este detalle te recuerde siempre lo mucho que te amo y lo especial que eres para mí. ¡Feliz día de las flores amarillas! 🌻✨
+      Deseo de todo corazón que esta pequeña experiencia te saque una gran sonrisa. Recuerda siempre que, sin importar dónde estemos o qué pase, siempre habrá un jardín de girasoles floreciendo por ti en mi corazón.
+    </p>
+
+    <p>
+      ¡Feliz día de las flores amarillas, mi vida hermosa! Que esta luz nos acompañe siempre. 🌻✨💛
     </p>
 
     <div class="signature">
-      Con todo mi amor,<br>
-      Tu yampi ❤️
+      Con todo mi amor eterno,<br>
+      <b>Tu yampi ❤️</b>
     </div>
-
-    <!-- ===== FIN DE LA CARTA ===== -->
   </div>
 </div>
 
-<audio id="audio" loop>
+<audio id="audio" loop preload="auto">
   <source src="musica.mp3" type="audio/mpeg">
 </audio>
 
 <script>
 const canvas=document.getElementById("canvas");
 const ctx=canvas.getContext("2d");
+const audio=document.getElementById("audio");
+const musicBtn=document.getElementById("music");
 let W,H,dpr;
 let started=false, mouse={x:0,y:0,tx:0,ty:0};
 let particles=[], flowers=[], fireflies=[], shootingStars=[];
 let flowerCount=0;
+let audioInitAttempted=false;
+
+// Manejo inteligente de reproducción de Audio
+function tryPlayAudio(){
+  audio.volume=0.7;
+  audio.play().then(()=>{
+    musicBtn.textContent="🔊";
+  }).catch(()=>{
+    musicBtn.textContent="🔇";
+  });
+}
+
+// Reproducir audio con la primera interacción en cualquier lugar
+function setupGlobalAudioTrigger(){
+  const triggerAudio=()=>{
+    if(!audioInitAttempted || audio.paused){
+      audioInitAttempted=true;
+      tryPlayAudio();
+    }
+  };
+  window.addEventListener("click", triggerAudio, {once:false});
+  window.addEventListener("touchstart", triggerAudio, {once:false});
+  window.addEventListener("pointerdown", triggerAudio, {once:false});
+}
+
+setupGlobalAudioTrigger();
+
+// Control manual del botón de música
+musicBtn.onclick=(e)=>{
+  e.stopPropagation();
+  if(audio.paused){
+    audio.play();
+    musicBtn.textContent="🔊";
+  }else{
+    audio.pause();
+    musicBtn.textContent="🔇";
+  }
+};
 
 function resize(){
   dpr=Math.min(devicePixelRatio||1,2);
@@ -138,21 +182,19 @@ addEventListener("resize",resize); resize();
 
 addEventListener("pointermove",e=>{
   mouse.tx=e.clientX;mouse.ty=e.clientY;
-  if(started && Math.random()<0.4){
-    particles.push(new Particle(e.clientX,e.clientY,(Math.random()-0.5)*1.5,(Math.random()-0.5)*1.5,rand(1,2.5),rand(20,45),"#ffea00"));
+  if(started && Math.random()<0.45){
+    particles.push(new Particle(e.clientX,e.clientY,(Math.random()-0.5)*1.8,(Math.random()-0.5)*1.8,rand(1,2.8),rand(20,50),"#ffea00"));
   }
 });
 
 addEventListener("pointerdown",e=>{
   if(e.target.tagName==='BUTTON' || e.target.closest('#modal')) return;
-  if(!started) return;
   burst(e.clientX,e.clientY,35);
   spawnFlower(e.clientX,e.clientY);
 });
 
 function rand(a,b){return a+Math.random()*(b-a)}
 
-// Clase Partículas Brillantes
 class Particle{
   constructor(x,y,vx,vy,size,life,color){
     this.x=x;this.y=y;this.vx=vx;this.vy=vy;
@@ -172,14 +214,13 @@ class Particle{
   }
 }
 
-// Clase Estrellas Fugaces
 class ShootingStar{
   constructor(){this.reset();}
   reset(){
     this.x=rand(0,W*0.8);
     this.y=rand(0,H*0.4);
-    this.len=rand(80,150);
-    this.speed=rand(6,12);
+    this.len=rand(90,160);
+    this.speed=rand(6,13);
     this.size=rand(1,2.5);
     this.active=true;
   }
@@ -202,7 +243,6 @@ class ShootingStar{
   }
 }
 
-// Clase Girasol Ilustrado
 class Flower{
   constructor(x,y,scale=1){
     this.x=x;this.y=y;this.scale=scale;
@@ -224,12 +264,12 @@ class Flower{
 
     // Tallo y Hojas
     ctx.strokeStyle="#2e5a1c";ctx.lineWidth=4;
-    ctx.beginPath();ctx.moveTo(0,60);ctx.quadraticCurveTo(-8,25,0,-5);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(0,65);ctx.quadraticCurveTo(-8,25,0,-5);ctx.stroke();
     
     // Hojas
     ctx.fillStyle="#3d7327";
-    ctx.beginPath();ctx.ellipse(-12,25,12,6,-Math.PI/4,0,Math.PI*2);ctx.fill();
-    ctx.beginPath();ctx.ellipse(12,35,12,6,Math.PI/4,0,Math.PI*2);ctx.fill();
+    ctx.beginPath();ctx.ellipse(-12,28,12,6,-Math.PI/4,0,Math.PI*2);ctx.fill();
+    ctx.beginPath();ctx.ellipse(12,38,12,6,Math.PI/4,0,Math.PI*2);ctx.fill();
 
     // Pétalos exteriores
     for(let i=0;i<16;i++){
@@ -272,43 +312,36 @@ function burst(x,y,n=30){
 }
 
 function spawnFlower(x,y){
-  let f=new Flower(x,Math.min(y,H-60),rand(0.6,1.1));
+  let f=new Flower(x,Math.min(y,H-60),rand(0.65,1.15));
   flowers.push(f);
 }
 
 function seed(){
   flowers=[];
-  // Flores iniciales distribuidas
   for(let i=0;i<18;i++){
     spawnFlower(rand(30,W-30),rand(H*0.5,H-50));
   }
-  // Luciérnagas
   for(let i=0;i<80;i++){
     fireflies.push({
       x:rand(0,W),y:rand(0,H),r:rand(0.8,2.5),
       a:rand(0,Math.PI*2),s:rand(0.005,0.02)
     });
   }
-  // Estrellas fugaces
   for(let i=0;i<3;i++) shootingStars.push(new ShootingStar());
 }
 
 function drawBackground(){
-  // Cielo Espacial / Galaxia
   let g=ctx.createRadialGradient(W/2,H*0.4,10,W/2,H*0.5,Math.max(W,H)*0.7);
   g.addColorStop(0,"#3a2c00");g.addColorStop(0.35,"#120c02");g.addColorStop(1,"#020105");
   ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
 
-  // Estrellas fugaces
   shootingStars.forEach(s=>{s.update();s.draw()});
 
-  // Sol/Luna centelleante
-  let sun=ctx.createRadialGradient(W/2,H*0.42,5,W/2,H*0.42,120);
+  let sun=ctx.createRadialGradient(W/2,H*0.42,5,W/2,H*0.42,125);
   sun.addColorStop(0,"#ffffff");sun.addColorStop(0.25,"#fff59d");
   sun.addColorStop(0.55,"#ffb300");sun.addColorStop(1,"rgba(255,179,0,0)");
-  ctx.fillStyle=sun;ctx.beginPath();ctx.arc(W/2,H*0.42,120,0,Math.PI*2);ctx.fill();
+  ctx.fillStyle=sun;ctx.beginPath();ctx.arc(W/2,H*0.42,125,0,Math.PI*2);ctx.fill();
 
-  // Luciérnagas flotantes
   fireflies.forEach(f=>{
     f.a+=f.s;
     f.y-=0.3; if(f.y<0) f.y=H;
@@ -346,7 +379,6 @@ function animate(){
   particles=particles.filter(p=>p.life>0);
   particles.forEach(p=>{p.update();p.draw()});
 
-  // Resplandor del Suelo
   let ground=ctx.createLinearGradient(0,H*0.75,0,H);
   ground.addColorStop(0,"rgba(255,200,0,0.18)");ground.addColorStop(1,"rgba(5,2,0,0.8)");
   ctx.fillStyle=ground;ctx.fillRect(0,H*0.7,W,H*0.3);
@@ -362,10 +394,7 @@ function startExperience(){
   document.getElementById("subtitle").textContent="Mueve el cursor, toca la pantalla y haz florecer todo este mundo para ti...";
   seed();
   for(let i=0;i<6;i++) burst(W/2,H/2,25);
-
-  const audio=document.getElementById("audio");
-  audio.volume=0.7;
-  audio.play().then(()=>document.getElementById("music").textContent="🔊").catch(()=>{});
+  tryPlayAudio();
 }
 
 document.getElementById("start").onclick=startExperience;
@@ -380,12 +409,8 @@ document.getElementById("modal").addEventListener("click",e=>{
   if(e.target.id==="modal")closeLetter();
 });
 
-const audio=document.getElementById("audio");
-document.getElementById("music").onclick=()=>{
-  if(audio.paused){audio.play();document.getElementById("music").textContent="🔊"}
-  else{audio.pause();document.getElementById("music").textContent="🔇"}
-};
-
+// Inicialización automática
+seed();
 animate();
 </script>
 </body>
